@@ -1,4 +1,11 @@
+.background {
+  background: linear-gradient(110deg, #fdcd3b 60%, #ffed4b 60%);
+  z-index: 0;
+  width: 100vw;
+  height: 100vh;
+}
 .container {
+  z-index: 1;
   position: absolute;
   left: 50%;
   top: 50%;
