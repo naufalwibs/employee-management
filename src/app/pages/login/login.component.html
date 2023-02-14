@@ -1,0 +1,74 @@
+<div class="container">
+  <form class="login" [formGroup]="loginForm">
+    <h1>Employee Management</h1>
+    <div class="login__form">
+      <div class="login__form--wrapper">
+        <div class="icon">
+          <mat-icon> account_circle </mat-icon>
+        </div>
+        <input
+          type="text"
+          class="login__form--wrapper--username"
+          placeholder="Username"
+          formControlName="username"
+          [ngClass]="{
+            invalid:
+              loginForm.get('username').touched &&
+              loginForm.get('username').hasError('required')
+          }"
+        />
+        <p
+          class="error-message"
+          *ngIf="
+            loginForm.get('username').touched &&
+            loginForm.get('username').hasError('required')
+          "
+        >
+          Harus diisi
+        </p>
+      </div>
+      <div class="login__form--wrapper">
+        <div class="icon">
+          <mat-icon> password </mat-icon>
+        </div>
+        <input
+          [type]="
+            this.loginForm.get('showPassword').value ? 'text' : 'password'
+          "
+          class="login__form--wrapper--password"
+          placeholder="Password"
+          formControlName="password"
+          [ngClass]="{
+            invalid:
+              loginForm.get('password').touched &&
+              loginForm.get('password').hasError('required')
+          }"
+        />
+        <p
+          class="error-message"
+          *ngIf="
+            loginForm.get('password').touched &&
+            loginForm.get('password').hasError('required')
+          "
+        >
+          Harus diisi
+        </p>
+      </div>
+    </div>
+    <label class="show-password">
+      <input type="checkbox" formControlName="showPassword" />
+      <span class="checkmark"></span>
+      Show Password
+    </label>
+    <button
+      class="login__button"
+      (click)="login()"
+      [disabled]="!loginForm.valid"
+      [ngStyle]="{
+        'background-color': loginForm.valid ? 'blue' : 'gray'
+      }"
+    >
+      Login
+    </button>
+  </form>
+</div>
