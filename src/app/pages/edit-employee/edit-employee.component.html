@@ -1,0 +1,238 @@
+<div class="container">
+  <form [formGroup]="editEmployeeForm">
+    <h1>Edit Employee</h1>
+    <div class="input-wrapper">
+      <label>Username</label>
+      <input
+        formControlName="username"
+        placeholder="Username (ex: johndoe21)"
+        type="text"
+        [ngClass]="{
+          invalid:
+            editEmployeeForm.get('username').touched &&
+            editEmployeeForm.get('username').hasError('required')
+        }"
+      />
+      <p
+        class="error-message"
+        *ngIf="
+          editEmployeeForm.get('username').touched &&
+          editEmployeeForm.get('username').hasError('required')
+        "
+      >
+        Harus diisi
+      </p>
+    </div>
+    <div class="input-wrapper">
+      <label>Employee Name</label>
+      <div class="name-wrapper">
+        <div class="input-wrapper-nw">
+          <input
+            formControlName="firstName"
+            placeholder="First Name"
+            type="text"
+            [ngClass]="{
+              invalid:
+                editEmployeeForm.get('firstName').touched &&
+                editEmployeeForm.get('firstName').hasError('required')
+            }"
+          />
+          <p
+            class="error-message-nw"
+            *ngIf="
+              editEmployeeForm.get('firstName').touched &&
+              editEmployeeForm.get('firstName').hasError('required')
+            "
+          >
+            Harus diisi
+          </p>
+        </div>
+        <div class="input-wrapper-nw">
+          <input
+            formControlName="lastName"
+            placeholder="Last Name"
+            type="text"
+            [ngClass]="{
+              invalid:
+                editEmployeeForm.get('lastName').touched &&
+                editEmployeeForm.get('lastName').hasError('required')
+            }"
+          />
+          <p
+            class="error-message-nw"
+            *ngIf="
+              editEmployeeForm.get('lastName').touched &&
+              editEmployeeForm.get('lastName').hasError('required')
+            "
+          >
+            Harus diisi
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="input-wrapper">
+      <label>Email</label>
+      <input
+        formControlName="email"
+        placeholder="Email (ex: johndoe21@airmail.com)"
+        type="email"
+        [ngClass]="{
+          invalid:
+            (editEmployeeForm.get('email').touched &&
+              editEmployeeForm.get('email').hasError('required')) ||
+            editEmployeeForm.get('email').hasError('email')
+        }"
+      />
+      <p
+        class="error-message"
+        *ngIf="
+          editEmployeeForm.get('email').touched &&
+          editEmployeeForm.get('email').hasError('required')
+        "
+      >
+        Harus diisi
+      </p>
+      <p
+        class="error-message"
+        *ngIf="
+          editEmployeeForm.get('email').touched &&
+          editEmployeeForm.get('email').value &&
+          editEmployeeForm.get('email').hasError('email')
+        "
+      >
+        Format Email Tidak Sesuai
+      </p>
+    </div>
+    <div class="input-wrapper">
+      <label>Status</label>
+      <select
+        formControlName="status"
+        [ngClass]="{
+          invalid:
+            editEmployeeForm.get('status').touched &&
+            editEmployeeForm.get('status').hasError('required')
+        }"
+      >
+        <option value="" disabled selected>Status</option>
+        <option [ngValue]="true">Active</option>
+        <option [ngValue]="false">Inactive</option>
+      </select>
+      <p
+        class="error-message"
+        *ngIf="
+          editEmployeeForm.get('status').touched &&
+          editEmployeeForm.get('status').hasError('required')
+        "
+      >
+        Harus diisi
+      </p>
+    </div>
+    <div class="input-wrapper">
+      <label>Birth Date</label>
+      <input
+        formControlName="birthDate"
+        placeholder="Birth Date"
+        type="date"
+        max="{{ maxDate | date : 'yyyy-MM-dd' }}"
+        [ngClass]="{
+          invalid:
+            editEmployeeForm.get('birthDate').touched &&
+            editEmployeeForm.get('birthDate').hasError('required')
+        }"
+      />
+      <p
+        class="error-message"
+        *ngIf="
+          editEmployeeForm.get('birthDate').touched &&
+          editEmployeeForm.get('birthDate').hasError('required')
+        "
+      >
+        Harus diisi
+      </p>
+    </div>
+    <div class="input-wrapper">
+      <label>Salary</label>
+      <input
+        formControlName="basicSalary"
+        placeholder="Basic Salary (ex: 15000000)"
+        type="number"
+        min="0"
+        [ngClass]="{
+          invalid:
+            editEmployeeForm.get('basicSalary').touched &&
+            editEmployeeForm.get('basicSalary').hasError('required')
+        }"
+      />
+      <p
+        class="error-message"
+        *ngIf="
+          editEmployeeForm.get('basicSalary').touched &&
+          editEmployeeForm.get('basicSalary').hasError('required')
+        "
+      >
+        Harus diisi
+      </p>
+    </div>
+    <div class="input-wrapper">
+      <label>Group</label>
+      <input
+        formControlName="group"
+        placeholder="Group"
+        list="groups"
+        name="group"
+        [ngClass]="{
+          invalid:
+            editEmployeeForm.get('group').touched &&
+            editEmployeeForm.get('group').hasError('required')
+        }"
+      />
+      <datalist id="groups">
+        <option
+          *ngFor="let group of availableGroup"
+          value="{{ group }}"
+        ></option>
+      </datalist>
+      <p
+        class="error-message"
+        *ngIf="
+          editEmployeeForm.get('group').touched &&
+          editEmployeeForm.get('group').hasError('required')
+        "
+      >
+        Harus diisi
+      </p>
+    </div>
+    <div class="input-wrapper">
+      <label>Description</label>
+      <input
+        formControlName="description"
+        placeholder="Description"
+        type="date"
+        max="{{ maxDate | date : 'yyyy-MM-dd' }}"
+        [ngClass]="{
+          invalid:
+            editEmployeeForm.get('description').touched &&
+            editEmployeeForm.get('description').hasError('required')
+        }"
+      />
+      <p
+        class="error-message"
+        *ngIf="
+          editEmployeeForm.get('description').touched &&
+          editEmployeeForm.get('description').hasError('required')
+        "
+      >
+        Harus diisi
+      </p>
+    </div>
+    <button
+      (click)="editEmployee()"
+      [disabled]="!editEmployeeForm.valid"
+      [ngStyle]="{
+        'background-color': editEmployeeForm.valid ? 'green' : 'gray'
+      }"
+    >
+      Save Edit
+    </button>
+  </form>
+</div>
