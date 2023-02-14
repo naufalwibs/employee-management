@@ -1,0 +1,37 @@
+.container {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  .not-found {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    .icon {
+      display: flex;
+      flex-direction: row;
+      font-size: 12rem;
+      height: 100%;
+      justify-content: center;
+    }
+    h1 {
+      font-size: 2rem;
+      letter-spacing: 0.8rem;
+    }
+    h1,
+    h3 {
+      text-align: center;
+    }
+    button {
+      padding: 8px 12px;
+      border-radius: 8px;
+      border: 1px solid gray;
+      text-transform: uppercase;
+      font-weight: 600;
+      background-color: blue;
+      color: white;
+      letter-spacing: 0.1rem;
+      text-align: center;
+    }
+  }
+}
