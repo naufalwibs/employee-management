@@ -1,0 +1,49 @@
+<div class="container" *ngIf="employee">
+  <h1>Employee Detail</h1>
+  <table>
+    <tr>
+      <th>Username:</th>
+      <td>{{ employee.username }}</td>
+    </tr>
+    <tr>
+      <th>First Name:</th>
+      <td>{{ employee.firstName }}</td>
+    </tr>
+    <tr>
+      <th>Last Name:</th>
+      <td>{{ employee.lastName }}</td>
+    </tr>
+    <tr>
+      <th>Email:</th>
+      <td>{{ employee.email }}</td>
+    </tr>
+    <tr>
+      <th>Birth Date:</th>
+      <td>{{ employee.birthDate }}</td>
+    </tr>
+    <tr>
+      <th>Basic Salary:</th>
+      <td>{{ employee.basicSalary | salaryFormat }}</td>
+    </tr>
+    <tr>
+      <th>Status:</th>
+      <td>{{ employee.status ? "Active" : "Inactive" }}</td>
+    </tr>
+    <tr>
+      <th>Group:</th>
+      <td>{{ employee.group }}</td>
+    </tr>
+    <tr>
+      <th>Description:</th>
+      <td>{{ employee.description }}</td>
+    </tr>
+  </table>
+  <div class="button-container">
+    <button (click)="backToPreviousPage()">OK</button>
+  </div>
+</div>
+
+<div class="not-found" *ngIf="!employee">
+  <h1>User Not Found</h1>
+  <button (click)="backToPreviousPage()">OK</button>
+</div>

@@ -1,0 +1,87 @@
+.container {
+  height: 100vh;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(110deg, #fdcd3b 60%, #ffed4b 60%);
+  .login {
+    background: rgba(0, 0, 0, 0.756);
+    border: solid 2px;
+    border-radius: 12px;
+    padding: 2rem;
+    margin: 0 2rem;
+    color: white;
+    h1 {
+      text-align: center;
+      padding: 24px 0;
+      font-weight: 500;
+      margin: 0;
+      text-transform: uppercase;
+      letter-spacing: 0.3rem;
+    }
+    &__form {
+      display: flex;
+      flex-direction: column;
+      width: 80%;
+      margin: auto;
+      &--wrapper {
+        display: flex;
+        position: relative;
+        flex-direction: row;
+        justify-content: center;
+        align-content: center;
+        align-items: center;
+        .icon {
+          display: flex;
+          flex-direction: row;
+          margin-right: 1rem;
+        }
+        .error-message {
+          position: absolute;
+          bottom: -22px;
+          right: 5px;
+          font-size: 0.7rem;
+          color: red;
+        }
+
+        &--username,
+        &--password {
+          width: 100%;
+          margin: 8px 0;
+          padding: 8px;
+          border-radius: 12px;
+          border-width: 1px;
+          &.invalid {
+            border: 1px solid red;
+          }
+        }
+      }
+    }
+    .show-password {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      margin: 1rem 0 0 0;
+      .checkmark {
+        margin-right: 0.5rem;
+      }
+    }
+    button {
+      display: flex;
+      flex-direction: column;
+      align-self: center;
+      min-width: 6rem;
+      padding: 10px 0;
+      margin: 2rem auto;
+      text-transform: uppercase;
+      font-weight: 700;
+      align-items: center;
+      border-radius: 8px;
+      border-width: 1px;
+      background-color: blue;
+      color: white;
+    }
+  }
+}

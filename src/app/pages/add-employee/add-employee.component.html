@@ -1,0 +1,238 @@
+<div class="container">
+  <form [formGroup]="addEmployeeForm">
+    <h1>Add Employee</h1>
+    <div class="input-wrapper">
+      <label>Username</label>
+      <input
+        formControlName="username"
+        placeholder="Username (ex: johndoe21)"
+        type="text"
+        [ngClass]="{
+          invalid:
+            addEmployeeForm.get('username').touched &&
+            addEmployeeForm.get('username').hasError('required')
+        }"
+      />
+      <p
+        class="error-message"
+        *ngIf="
+          addEmployeeForm.get('username').touched &&
+          addEmployeeForm.get('username').hasError('required')
+        "
+      >
+        Harus diisi
+      </p>
+    </div>
+    <div class="input-wrapper">
+      <label>Employee Name</label>
+      <div class="name-wrapper">
+        <div class="input-wrapper-nw">
+          <input
+            formControlName="firstName"
+            placeholder="First Name"
+            type="text"
+            [ngClass]="{
+              invalid:
+                addEmployeeForm.get('firstName').touched &&
+                addEmployeeForm.get('firstName').hasError('required')
+            }"
+          />
+          <p
+            class="error-message-nw"
+            *ngIf="
+              addEmployeeForm.get('firstName').touched &&
+              addEmployeeForm.get('firstName').hasError('required')
+            "
+          >
+            Harus diisi
+          </p>
+        </div>
+        <div class="input-wrapper-nw">
+          <input
+            formControlName="lastName"
+            placeholder="Last Name"
+            type="text"
+            [ngClass]="{
+              invalid:
+                addEmployeeForm.get('lastName').touched &&
+                addEmployeeForm.get('lastName').hasError('required')
+            }"
+          />
+          <p
+            class="error-message-nw"
+            *ngIf="
+              addEmployeeForm.get('lastName').touched &&
+              addEmployeeForm.get('lastName').hasError('required')
+            "
+          >
+            Harus diisi
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="input-wrapper">
+      <label>Email</label>
+      <input
+        formControlName="email"
+        placeholder="Email (ex: johndoe21@airmail.com)"
+        type="email"
+        [ngClass]="{
+          invalid:
+            (addEmployeeForm.get('email').touched &&
+              addEmployeeForm.get('email').hasError('required')) ||
+            addEmployeeForm.get('email').hasError('email')
+        }"
+      />
+      <p
+        class="error-message"
+        *ngIf="
+          addEmployeeForm.get('email').touched &&
+          addEmployeeForm.get('email').hasError('required')
+        "
+      >
+        Harus diisi
+      </p>
+      <p
+        class="error-message"
+        *ngIf="
+          addEmployeeForm.get('email').touched &&
+          addEmployeeForm.get('email').value &&
+          addEmployeeForm.get('email').hasError('email')
+        "
+      >
+        Format Email Tidak Sesuai
+      </p>
+    </div>
+    <div class="input-wrapper">
+      <label>Status</label>
+      <select
+        formControlName="status"
+        [ngClass]="{
+          invalid:
+            addEmployeeForm.get('status').touched &&
+            addEmployeeForm.get('status').hasError('required')
+        }"
+      >
+        <option value="" disabled selected>Status</option>
+        <option [ngValue]="true">Active</option>
+        <option [ngValue]="false">Inactive</option>
+      </select>
+      <p
+        class="error-message"
+        *ngIf="
+          addEmployeeForm.get('status').touched &&
+          addEmployeeForm.get('status').hasError('required')
+        "
+      >
+        Harus diisi
+      </p>
+    </div>
+    <div class="input-wrapper">
+      <label>Birth Date</label>
+      <input
+        formControlName="birthDate"
+        placeholder="Birth Date"
+        type="date"
+        max="{{ maxDate | date : 'yyyy-MM-dd' }}"
+        [ngClass]="{
+          invalid:
+            addEmployeeForm.get('birthDate').touched &&
+            addEmployeeForm.get('birthDate').hasError('required')
+        }"
+      />
+      <p
+        class="error-message"
+        *ngIf="
+          addEmployeeForm.get('birthDate').touched &&
+          addEmployeeForm.get('birthDate').hasError('required')
+        "
+      >
+        Harus diisi
+      </p>
+    </div>
+    <div class="input-wrapper">
+      <label>Salary</label>
+      <input
+        formControlName="basicSalary"
+        placeholder="Basic Salary (ex: 15000000)"
+        type="number"
+        min="0"
+        [ngClass]="{
+          invalid:
+            addEmployeeForm.get('basicSalary').touched &&
+            addEmployeeForm.get('basicSalary').hasError('required')
+        }"
+      />
+      <p
+        class="error-message"
+        *ngIf="
+          addEmployeeForm.get('basicSalary').touched &&
+          addEmployeeForm.get('basicSalary').hasError('required')
+        "
+      >
+        Harus diisi
+      </p>
+    </div>
+    <div class="input-wrapper">
+      <label>Group</label>
+      <input
+        formControlName="group"
+        placeholder="Group"
+        list="groups"
+        name="group"
+        [ngClass]="{
+          invalid:
+            addEmployeeForm.get('group').touched &&
+            addEmployeeForm.get('group').hasError('required')
+        }"
+      />
+      <datalist id="groups">
+        <option
+          *ngFor="let group of availableGroup"
+          value="{{ group }}"
+        ></option>
+      </datalist>
+      <p
+        class="error-message"
+        *ngIf="
+          addEmployeeForm.get('group').touched &&
+          addEmployeeForm.get('group').hasError('required')
+        "
+      >
+        Harus diisi
+      </p>
+    </div>
+    <div class="input-wrapper">
+      <label>Description</label>
+      <input
+        formControlName="description"
+        placeholder="Description"
+        type="date"
+        max="{{ maxDate | date : 'yyyy-MM-dd' }}"
+        [ngClass]="{
+          invalid:
+            addEmployeeForm.get('description').touched &&
+            addEmployeeForm.get('description').hasError('required')
+        }"
+      />
+      <p
+        class="error-message"
+        *ngIf="
+          addEmployeeForm.get('description').touched &&
+          addEmployeeForm.get('description').hasError('required')
+        "
+      >
+        Harus diisi
+      </p>
+    </div>
+    <button
+      (click)="addEmployee()"
+      [disabled]="!addEmployeeForm.valid"
+      [ngStyle]="{
+        'background-color': addEmployeeForm.valid ? 'green' : 'gray'
+      }"
+    >
+      + Add Employee
+    </button>
+  </form>
+</div>

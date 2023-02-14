@@ -1,0 +1,172 @@
+<div class="container">
+  <h1>Employee List</h1>
+  <div class="heading">
+    <div class="left">
+      <input
+        type="text"
+        placeholder="Search Employee Name...."
+        [(ngModel)]="search"
+        (ngModelChange)="searchFilter()"
+      />
+      <div class="sort-wrapper">
+        <label>Sort By</label>
+        <select
+          name="sort"
+          id="sorting"
+          [(ngModel)]="sortType"
+          (ngModelChange)="sortBy($event)"
+        >
+          <option value="username,ASC">Username ASC</option>
+          <option value="username,DESC">Username DESC</option>
+          <option value="firstName,ASC">Firstname ASC</option>
+          <option value="firstName,DESC">Firstname DESC</option>
+          <option value="lastName,ASC">Lastname ASC</option>
+          <option value="lastName,DESC">Lastname DESC</option>
+          <option value="email,ASC">Email ASC</option>
+          <option value="email,DESC">Email DESC</option>
+          <option value="birthDate,ASC">Birth Date ASC</option>
+          <option value="birthDate,DESC">Birth Date DESC</option>
+          <option value="basicSalary,ASC">Basic Salary ASC</option>
+          <option value="basicSalary,DESC">Basic Salary DESC</option>
+          <option value="status,ASC">Status ASC</option>
+          <option value="status,DESC">Status DESC</option>
+          <option value="group,ASC">Group ASC</option>
+          <option value="group,DESC">Group DESC</option>
+        </select>
+      </div>
+    </div>
+    <div class="right">
+      <button class="add" (click)="goToAddEmployee()">+ Add Employee</button>
+      <button class="logout" (click)="logout()">Logout</button>
+    </div>
+  </div>
+  <table *ngIf="!search" class="hide-scrollbar">
+    <tr>
+      <th class="adjusment-w">Username</th>
+      <th class="adjusment-w">Firstname</th>
+      <th class="adjusment-w">Lastname</th>
+      <th class="adjusment-w mail-w">Email</th>
+      <th class="adjusment-w">Birth Date</th>
+      <th class="adjusment-w">Basic Salary</th>
+      <th class="adjusment-w">Status</th>
+      <th class="adjusment-w">Group</th>
+      <th class="adjusment-w">Description</th>
+      <th class="action-w">Action</th>
+    </tr>
+    <ng-container *ngFor="let employee of employeeListPpv">
+      <tr>
+        <td class="adjusment-w" (click)="goToEmployeeDetail(employee.id)">
+          <div class="wrapper-td">
+            <mat-icon aria-label="format list" *ngIf="currentPage < maxPage"
+              >format_list_bulleted</mat-icon
+            >
+            {{ employee.username }}
+          </div>
+        </td>
+        <td class="adjusment-w">{{ employee.firstName }}</td>
+        <td class="adjusment-w">{{ employee.lastName }}</td>
+        <td class="adjusment-w mail-w">{{ employee.email }}</td>
+        <td class="adjusment-w">{{ employee.birthDate }}</td>
+        <td class="adjusment-w">{{ employee.basicSalary | salaryFormat }}</td>
+        <td class="adjusment-w">
+          {{ employee.status ? "Active" : "Inactive" }}
+        </td>
+        <td class="adjusment-w">{{ employee.group }}</td>
+        <td class="adjusment-w">{{ employee.description }}</td>
+        <td class="action-w">
+          <div class="wrapper-td">
+            <button class="edit" (click)="editEmployee(employee.id)">
+              Edit
+            </button>
+            <button class="delete" (click)="openDeletePopUp(employee.id)">
+              Delete
+            </button>
+          </div>
+        </td>
+      </tr>
+    </ng-container>
+  </table>
+  <table *ngIf="search">
+    <tr *ngIf="filteredEmployee.length">
+      <th class="adjusment-w">Username</th>
+      <th class="adjusment-w">Firstname</th>
+      <th class="adjusment-w">Lastname</th>
+      <th class="adjusment-w mail-w">Email</th>
+      <th class="adjusment-w">Birth Date</th>
+      <th class="adjusment-w">Basic Salary</th>
+      <th class="adjusment-w">Status</th>
+      <th class="adjusment-w">Group</th>
+      <th class="adjusment-w">Description</th>
+      <th class="action-w">Action</th>
+    </tr>
+    <ng-container *ngFor="let employee of filteredEmployee">
+      <tr>
+        <td class="adjusment-w" (click)="goToEmployeeDetail(employee.id)">
+          <div class="wrapper-td">
+            <mat-icon aria-label="format list" *ngIf="currentPage < maxPage"
+              >format_list_bulleted</mat-icon
+            >
+            {{ employee.username }}
+          </div>
+        </td>
+        <td class="adjusment-w">{{ employee.firstName }}</td>
+        <td class="adjusment-w">{{ employee.lastName }}</td>
+        <td class="adjusment-w mail-w">{{ employee.email }}</td>
+        <td class="adjusment-w">{{ employee.birthDate }}</td>
+        <td class="adjusment-w">{{ employee.basicSalary | salaryFormat }}</td>
+        <td class="adjusment-w">
+          {{ employee.status ? "Active" : "Inactive" }}
+        </td>
+        <td class="adjusment-w">{{ employee.group }}</td>
+        <td class="adjusment-w">{{ employee.description }}</td>
+        <td class="action-w">
+          <div class="wrapper-td">
+            <button class="edit" (click)="editEmployee(employee.id)">
+              Edit
+            </button>
+            <button class="delete" (click)="openDeletePopUp(employee.id)">
+              Delete
+            </button>
+          </div>
+        </td>
+      </tr>
+    </ng-container>
+  </table>
+  <ng-container *ngIf="!filteredEmployee.length && search">
+    <div class="not-found"><h1>Employee Not Found</h1></div>
+  </ng-container>
+  <div class="paging" *ngIf="!search">
+    <label for="page-per-view">Page per view:</label>
+    <select
+      name="page-per-view"
+      id="page-per-view"
+      [(ngModel)]="pagePerView"
+      (ngModelChange)="changePagePerView($event)"
+    >
+      <option *ngFor="let option of pagePerViewOption" [ngValue]="option">
+        {{ option }}
+      </option>
+    </select>
+    <div class="paging__nav">
+      <mat-icon
+        aria-label="chevron left"
+        (click)="goToPreviousPage()"
+        *ngIf="currentPage > 1"
+        >chevron_left</mat-icon
+      >
+      <p class="current-page">{{ currentPage }} of {{ maxPage }}</p>
+      <mat-icon
+        aria-label="chevron right"
+        (click)="goToNextPage()"
+        *ngIf="currentPage < maxPage"
+        >chevron_right</mat-icon
+      >
+    </div>
+  </div>
+</div>
+
+<div class="overlay" *ngIf="showModal" (click)="setShowModal()"></div>
+<app-delete-pop-up
+  *ngIf="showModal"
+  (confirmDeleteEmitter)="deleteEmployee($event)"
+></app-delete-pop-up>
